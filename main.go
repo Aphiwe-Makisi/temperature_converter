@@ -49,6 +49,15 @@ func main() {
 
 		fmt.Printf("Temperature in Kelvin: %.2f K\n", k)
 		break
+	case 4:
+		c, err := convertKevToCel()
+		if err != nil {
+			fmt.Print("Error: %v", err)
+			return
+		}
+
+		fmt.Printf("Temperature in Celsius: %.2f°C\n", c)
+		break
 	}
 
 	fmt.Println("Thank you for using Temperature Converter, Goodbye! 😃")
@@ -67,7 +76,7 @@ func convertCelToFah() (float32, error) {
 	return fahrenheit, nil
 }
 
-// Takes temperature in °F and converts in to °C
+// Takes temperature in °F and converts it to °C
 func convertFahToCel() (float32, error) {
 	var temperature float32
 	fmt.Print("Enter the temperature in Fahrenheit: ")
@@ -79,6 +88,7 @@ func convertFahToCel() (float32, error) {
 	return celsius, nil
 }
 
+// Takes temperature in °C and convert it to K
 func convertCelToKel() (float32, error) {
 	var temperature float32
 	const k float32 = 273.15
@@ -91,7 +101,18 @@ func convertCelToKel() (float32, error) {
 	return kelvin, nil
 }
 
-func convertKevToCel() {}
+// Takes temperature in K and convert it to °C
+func convertKevToCel() (float32, error) {
+	var temperature float32
+	const k float32 = 273.15
+	fmt.Print("Enter the temperature in Kelvin: ")
+	if _, err := fmt.Scanln(&temperature); err != nil {
+		return 0, fmt.Errorf("Invalid temperature: %v", err)
+	}
+
+	celsius := temperature - k
+	return celsius, nil
+}
 
 func convertFahToKel() {}
 
