@@ -31,6 +31,15 @@ func main() {
 
 		fmt.Printf("Temperature in Fahrenheit: %.2f°F\n", f)
 		break
+	case 2:
+		c, err := convertFahToCel()
+		if err != nil {
+			fmt.Printf("Error: %v", err)
+			return
+		}
+
+		fmt.Printf("Temperature in Celcius: %.2f°C\n", c)
+		break
 	}
 
 	fmt.Println("Thank you for using Temperature Converter, Goodbye! 😃")
@@ -49,7 +58,17 @@ func convertCelToFah() (float32, error) {
 	return fahrenheit, nil
 }
 
-func convertFahToCel() {}
+// Takes temperature in °F and converts in to °C
+func convertFahToCel() (float32, error) {
+	var temperature float32
+	fmt.Print("Enter the temperature in Fahrenheit: ")
+	if _, err := fmt.Scanln(&temperature); err != nil {
+		return 0, fmt.Errorf("Invalid temperature: %v", err)
+	}
+
+	celsius := (temperature - 32) * 5 / 9
+	return celsius, nil
+}
 
 func convertCelToKel() {}
 
