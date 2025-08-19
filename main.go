@@ -38,7 +38,16 @@ func main() {
 			return
 		}
 
-		fmt.Printf("Temperature in Celcius: %.2f°C\n", c)
+		fmt.Printf("Temperature in Celsius: %.2f°C\n", c)
+		break
+	case 3:
+		k, err := convertCelToKel()
+		if err != nil {
+			fmt.Printf("Error: %v", err)
+			return
+		}
+
+		fmt.Printf("Temperature in Kelvin: %.2f K\n", k)
 		break
 	}
 
@@ -70,7 +79,17 @@ func convertFahToCel() (float32, error) {
 	return celsius, nil
 }
 
-func convertCelToKel() {}
+func convertCelToKel() (float32, error) {
+	var temperature float32
+	const k float32 = 273.15
+	fmt.Print("Enter the temperature in Celsius: ")
+	if _, err := fmt.Scanln(&temperature); err != nil {
+		return 0, fmt.Errorf("Invalid temperature: %v", err)
+	}
+
+	kelvin := temperature + k
+	return kelvin, nil
+}
 
 func convertKevToCel() {}
 
